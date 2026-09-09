@@ -31,8 +31,8 @@ BASE_TEMPLATE = """
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Gareje</title>
-    <!-- Favicon - using icon.png -->
+    <title>Gareje | {{ title }}</title>
+    <!-- Favicon - using icon.png from root folder -->
     <link rel="icon" type="image/png" href="/icon.png" />
     <link rel="apple-touch-icon" href="/icon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
@@ -72,6 +72,9 @@ BASE_TEMPLATE = """
         }
 
         .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
             font-size: 2rem;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
@@ -84,6 +87,13 @@ BASE_TEMPLATE = """
             animation: gradientShift 4s ease-in-out infinite;
             letter-spacing: 1px;
             text-shadow: 0 0 30px rgba(253, 160, 133, 0.3);
+        }
+
+        .nav-brand img {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            -webkit-text-fill-color: initial;
         }
 
         @keyframes gradientShift {
@@ -557,7 +567,10 @@ BASE_TEMPLATE = """
 <body>
     <div class="container">
         <nav class="navbar">
-            <a href="/" class="nav-brand">Gareje</a>
+            <a href="/" class="nav-brand">
+                <img src="/icon.png" alt="Gareje" />
+                Gareje
+            </a>
             <div class="nav-links">
                 <a href="/" class="{% if active == 'home' %}active{% endif %}">Home</a>
                 <a href="/about" class="{% if active == 'about' %}active{% endif %}">About Me</a>
@@ -680,7 +693,7 @@ def about():
         </div>
     </div>
     """
-    return render_template_string(BASE_TEMPLATE, title="About", active="about", content=content.replace("{{ time }}", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    return render_template_string(BASE_TEMPLATE, title="About Me", active="about", content=content.replace("{{ time }}", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 @app.route('/guestbook', methods=['GET', 'POST'])
 def guestbook():
