@@ -31,11 +31,13 @@ BASE_TEMPLATE = """
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Gareje: {{ title }}</title>
-    <!-- Favicon - using profile.jpg as browser tab icon -->
-    <link rel="icon" type="image/jpeg" href="/static/profile.jpg" />
-    <link rel="apple-touch-icon" href="/static/profile.jpg" />
+    <title>Gareje</title>
+    <!-- Favicon - using icon.png -->
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/icon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <!-- Google Fonts for fancy title -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet"/>
     <style>
         * {
             margin: 0;
@@ -70,13 +72,24 @@ BASE_TEMPLATE = """
         }
 
         .nav-brand {
-            font-size: 1.4rem;
+            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #f0f6fc 0%, #8ab4d6 100%);
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 25%, #f093fb 50%, #4facfe 75%, #43e97b 100%);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
+            animation: gradientShift 4s ease-in-out infinite;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(253, 160, 133, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .nav-links {
@@ -172,7 +185,7 @@ BASE_TEMPLATE = """
             inset: -4px;
             border-radius: 50%;
             padding: 3px;
-            background: conic-gradient(from 0deg, #3b9eff, #7b5cff, #3b9eff);
+            background: conic-gradient(from 0deg, #f6d365, #fda085, #f093fb, #4facfe, #43e97b, #f6d365);
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
             mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
             animation: spin 6s linear infinite;
@@ -212,14 +225,17 @@ BASE_TEMPLATE = """
         }
 
         .profile-info h1 {
-            font-size: 2.4rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #f0f6fc 0%, #8ab4d6 100%);
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 25%, #f093fb 50%, #4facfe 75%, #43e97b 100%);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
             margin-bottom: 0.2rem;
+            letter-spacing: 1px;
         }
 
         .profile-info .tagline {
@@ -245,11 +261,11 @@ BASE_TEMPLATE = """
         .btn-primary {
             display: inline-block;
             padding: 0.6rem 1.8rem;
-            background: linear-gradient(135deg, #3b9eff, #7b5cff);
+            background: linear-gradient(135deg, #f6d365, #fda085);
             border: none;
             border-radius: 60px;
-            color: #fff;
-            font-weight: 500;
+            color: #1a1a2e;
+            font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
             transition: 0.3s;
@@ -258,7 +274,7 @@ BASE_TEMPLATE = """
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px -8px rgba(59, 158, 255, 0.4);
+            box-shadow: 0 8px 25px -8px rgba(253, 160, 133, 0.5);
         }
 
         .btn-secondary {
@@ -299,11 +315,11 @@ BASE_TEMPLATE = """
 
         .stat-card:hover {
             background: rgba(255,255,255,0.05);
-            border-color: rgba(59, 158, 255, 0.15);
+            border-color: rgba(253, 160, 133, 0.2);
             transform: translateY(-3px);
         }
 
-        .stat-card .stat-icon { font-size: 1.2rem; color: #3b9eff; margin-bottom: 0.2rem; }
+        .stat-card .stat-icon { font-size: 1.2rem; color: #fda085; margin-bottom: 0.2rem; }
         .stat-card .stat-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: #7f97ab; }
         .stat-card .stat-value { font-size: 1rem; font-weight: 600; color: #eef4f9; }
 
@@ -329,10 +345,10 @@ BASE_TEMPLATE = """
             transition: 0.25s;
         }
 
-        .social-btn i { color: #7bb9ff; }
+        .social-btn i { color: #fda085; }
         .social-btn:hover {
-            background: rgba(59, 158, 255, 0.08);
-            border-color: rgba(59, 158, 255, 0.2);
+            background: rgba(253, 160, 133, 0.08);
+            border-color: rgba(253, 160, 133, 0.2);
             color: #fff;
             transform: translateY(-2px);
         }
@@ -350,7 +366,7 @@ BASE_TEMPLATE = """
             margin-top: 1rem;
         }
 
-        .footer-bar span i { color: #3b9eff; margin-right: 0.3rem; }
+        .footer-bar span i { color: #fda085; margin-right: 0.3rem; }
 
         /* Guestbook */
         .guestbook-form {
@@ -376,7 +392,7 @@ BASE_TEMPLATE = """
         .guestbook-form input:focus,
         .guestbook-form textarea:focus {
             outline: none;
-            border-color: #3b9eff;
+            border-color: #fda085;
             background: rgba(255,255,255,0.06);
         }
 
@@ -399,7 +415,7 @@ BASE_TEMPLATE = """
 
         .message-item .msg-name {
             font-weight: 600;
-            color: #7bb9ff;
+            color: #fda085;
             font-size: 0.9rem;
         }
 
@@ -433,13 +449,13 @@ BASE_TEMPLATE = """
 
         .contact-item:hover {
             background: rgba(255,255,255,0.05);
-            border-color: rgba(59, 158, 255, 0.15);
+            border-color: rgba(253, 160, 133, 0.2);
             transform: translateY(-3px);
         }
 
         .contact-item i {
             font-size: 2rem;
-            color: #3b9eff;
+            color: #fda085;
             margin-bottom: 0.5rem;
         }
 
@@ -458,13 +474,16 @@ BASE_TEMPLATE = """
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            font-family: 'Playfair Display', serif;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #f0f6fc 0%, #8ab4d6 100%);
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 25%, #f093fb 50%, #4facfe 75%, #43e97b 100%);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
         }
 
         .section-subtitle {
@@ -482,7 +501,7 @@ BASE_TEMPLATE = """
         }
 
         .about-content .highlight {
-            color: #7bb9ff;
+            color: #fda085;
             font-weight: 500;
         }
 
@@ -494,11 +513,11 @@ BASE_TEMPLATE = """
         }
 
         .interest-tag {
-            background: rgba(59, 158, 255, 0.08);
+            background: rgba(253, 160, 133, 0.08);
             padding: 0.4rem 1.2rem;
             border-radius: 60px;
-            border: 1px solid rgba(59, 158, 255, 0.1);
-            color: #7bb9ff;
+            border: 1px solid rgba(253, 160, 133, 0.1);
+            color: #fda085;
             font-size: 0.9rem;
         }
 
@@ -513,12 +532,14 @@ BASE_TEMPLATE = """
         @media (max-width: 820px) {
             .card { padding: 1.8rem; border-radius: 2rem; }
             .profile-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
-            .profile-info h1 { font-size: 2rem; }
+            .profile-info h1 { font-size: 2.2rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-info { grid-template-columns: 1fr; }
             .about-content { max-width: 100%; }
             .navbar { flex-direction: column; align-items: flex-start; }
             .nav-links { gap: 1rem; }
+            .nav-brand { font-size: 1.6rem; }
+            .section-title { font-size: 2rem; }
         }
 
         @media (max-width: 480px) {
@@ -527,13 +548,16 @@ BASE_TEMPLATE = """
             .stat-card { padding: 0.7rem; }
             .card { padding: 1.2rem; border-radius: 1.5rem; }
             .social-btn { padding: 0.3rem 0.9rem; font-size: 0.75rem; }
+            .nav-brand { font-size: 1.4rem; }
+            .profile-info h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="navbar">
-            <a href="/" class="nav-brand">Gareje.co.za</a>
+            <a href="/" class="nav-brand">Gareje</a>
             <div class="nav-links">
                 <a href="/" class="{% if active == 'home' %}active{% endif %}">Home</a>
                 <a href="/about" class="{% if active == 'about' %}active{% endif %}">About Me</a>
