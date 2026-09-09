@@ -7,219 +7,388 @@ HTML = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gareje - Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gareje.co.za | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e12;
+            color: #e8edf2;
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            background: #0a0a0a;
-            color: #ffffff;
-            padding: 20px;
+            justify-content: center;
+            padding: 1.5rem;
         }
-        
-        .container {
-            max-width: 800px;
+
+        .card {
+            max-width: 1000px;
             width: 100%;
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(145deg, rgba(18, 22, 26, 0.92), rgba(10, 14, 18, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 3rem;
+            padding: 3rem;
+            box-shadow: 
+                0 30px 60px -12px rgba(0,0,0,0.9),
+                0 0 0 1px rgba(255,255,255,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.03);
             position: relative;
             overflow: hidden;
         }
-        
-        .bg-blur {
+
+        /* Animated gradient orb */
+        .card::before {
+            content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background-image: url('/static/profile.jpg');
-            background-size: cover;
-            background-position: center;
-            filter: blur(30px);
-            opacity: 0.15;
-            z-index: 0;
+            top: -30%;
+            right: -20%;
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(circle at 70% 50%, rgba(0, 180, 255, 0.08), transparent 70%);
+            pointer-events: none;
+            animation: pulse 8s ease-in-out infinite;
         }
-        
-        .content {
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle at 30% 50%, rgba(120, 80, 255, 0.06), transparent 70%);
+            pointer-events: none;
+            animation: pulse 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* --- header / profile --- */
+        .profile-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 2.5rem;
             position: relative;
             z-index: 1;
         }
-        
-        .profile-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
+
+        .avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
         }
-        
+
+        .avatar-wrapper .ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            padding: 3px;
+            background: conic-gradient(from 0deg, #3b9eff, #7b5cff, #3b9eff);
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
+            animation: spin 6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #00d4ff;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-            margin-bottom: 20px;
+            display: block;
+            background: #1a222a;
+            position: relative;
+            z-index: 1;
         }
-        
-        h1 {
-            font-size: 2.5rem;
+
+        .online-dot {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 18px;
+            height: 18px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 3px solid #0a0e12;
+            z-index: 2;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .profile-info h1 {
+            font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #f0f6fc 0%, #8ab4d6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 5px;
+            margin-bottom: 0.3rem;
         }
-        
-        .title {
-            font-size: 1.1rem;
-            color: #888;
-            font-weight: 300;
-            letter-spacing: 2px;
+
+        .profile-info .title-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
         }
-        
-        .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-            margin: 30px 0;
-            opacity: 0.3;
+
+        .profile-info .tagline {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: #9aaebf;
         }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .info-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .info-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(0, 212, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        .info-item .label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .info-item .value {
-            font-size: 1.1rem;
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(34, 197, 94, 0.12);
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
             font-weight: 500;
-            color: #eee;
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.15);
         }
-        
-        .bio {
-            font-size: 1.05rem;
+
+        .badge i {
+            font-size: 0.6rem;
+        }
+
+        /* --- about --- */
+        .about-section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2.5rem;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: #c8d9e8;
+            max-width: 85%;
             line-height: 1.8;
-            color: #ccc;
+        }
+
+        .highlight {
+            color: #7bb9ff;
+            font-weight: 500;
+        }
+
+        /* --- stats grid --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.02);
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s ease;
             text-align: center;
-            margin: 20px 0;
         }
-        
-        .status-badge {
-            display: inline-block;
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            padding: 8px 20px;
-            border-radius: 50px;
+
+        .stat-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(59, 158, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px -8px rgba(0,0,0,0.4);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 1.4rem;
+            color: #3b9eff;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7f97ab;
+            margin-bottom: 0.15rem;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #eef4f9;
+        }
+
+        /* --- social bar --- */
+        .social-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 1.4rem 0.5rem 1.2rem;
+            border-radius: 60px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #b0c8db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+
+        .social-btn i {
+            font-size: 1.1rem;
+            width: 1.2rem;
+            color: #7bb9ff;
+            transition: 0.2s;
+        }
+
+        .social-btn:hover {
+            background: rgba(59, 158, 255, 0.08);
+            border-color: rgba(59, 158, 255, 0.2);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px -8px rgba(59, 158, 255, 0.15);
+        }
+
+        .social-btn:hover i {
+            color: #3b9eff;
+        }
+
+        /* --- footer --- */
+        .footer-bar {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            position: relative;
+            z-index: 1;
             font-size: 0.8rem;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            margin-top: 10px;
+            color: #5e7485;
         }
-        
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #555;
+
+        .footer-bar span i {
+            color: #3b9eff;
+            margin-right: 0.4rem;
         }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 25px;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .profile-pic {
-                width: 120px;
-                height: 120px;
-            }
+
+        /* --- responsiveness --- */
+        @media (max-width: 820px) {
+            .card { padding: 2rem 1.5rem; border-radius: 2rem; }
+            .profile-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+            .profile-info h1 { font-size: 2.4rem; }
+            .about-section p { max-width: 100%; font-size: 1rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .profile-pic { width: 110px; height: 110px; }
+            .profile-info h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .stat-card { padding: 0.9rem; }
+            .social-btn { padding: 0.4rem 1rem 0.4rem 0.8rem; font-size: 0.8rem; }
+            .footer-bar { flex-direction: column; align-items: center; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="bg-blur"></div>
-        <div class="content">
-            <div class="profile-section">
-                <img src="/static/profile.jpg" alt="Profile" class="profile-pic">
-                <h1>Gareje</h1>
-                <div class="title">Software Developer</div>
-                <div class="status-badge">🟢 Available for work</div>
-            </div>
-            
-            <div class="bio">
-                Passionate about building elegant solutions and bringing ideas to life through code.
-            </div>
-            
-            <div class="divider"></div>
-            
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="label">📍 Location</div>
-                    <div class="value">South Africa</div>
-                </div>
-                <div class="info-item">
-                    <div class="label">💼 Experience</div>
-                    <div class="value">3+ Years</div>
-                </div>
-                <div class="info-item">
-                    <div class="label">🛠️ Skills</div>
-                    <div class="value">Python, Flask, JavaScript</div>
-                </div>
-                <div class="info-item">
-                    <div class="label">🚀 Status</div>
-                    <div class="value">Live on Render</div>
-                </div>
-            </div>
-            
-            <div class="footer">
-                <p>© 2026 Gareje. Built with Flask & deployed on Render</p>
-                <p style="margin-top: 5px; font-size: 0.7rem;">🟢 Server time: {{ time }}</p>
+
+<div class="card">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="avatar-wrapper">
+            <div class="ring"></div>
+            <img src="/static/profile.jpg" alt="Gareje" class="profile-pic" />
+            <div class="online-dot"></div>
+        </div>
+        <div class="profile-info">
+            <h1>Gareje</h1>
+            <div class="title-row">
+                <span class="tagline">Software Developer</span>
+                <span class="badge"><i class="fas fa-circle"></i> Available for work</span>
             </div>
         </div>
     </div>
+
+    <!-- About -->
+    <div class="about-section">
+        <p>
+            Passionate about crafting <span class="highlight">clean, user-friendly</span> digital experiences. 
+            I build with Python, Flask, and modern front-end tools to bring ideas to life.
+        </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-map-pin"></i></div>
+            <div class="stat-label">Location</div>
+            <div class="stat-value">South Africa</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-code"></i></div>
+            <div class="stat-label">Experience</div>
+            <div class="stat-value">3+ Years</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-cogs"></i></div>
+            <div class="stat-label">Focus</div>
+            <div class="stat-value">Web &amp; Backend</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+            <div class="stat-label">Status</div>
+            <div class="stat-value">Live on Render</div>
+        </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="social-bar">
+        <a href="#" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        <a href="#" class="social-btn"><i class="fab fa-x-twitter"></i> Twitter</a>
+        <a href="#" class="social-btn"><i class="fas fa-envelope"></i> Email</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-bar">
+        <span><i class="fas fa-server"></i> Deployed on Render</span>
+        <span><i class="far fa-clock"></i> {{ time }}</span>
+    </div>
+</div>
+
 </body>
 </html>
 """
