@@ -280,7 +280,7 @@ BASE_TEMPLATE = """
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin: 2rem 0;
         }
@@ -580,11 +580,6 @@ def home():
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-code"></i></div>
-                    <div class="stat-label">Experience</div>
-                    <div class="stat-value">3+ Years</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-cogs"></i></div>
                     <div class="stat-label">Focus</div>
                     <div class="stat-value">Web & Backend</div>
                 </div>
@@ -597,9 +592,8 @@ def home():
 
             <div class="social-bar">
                 <a href="#" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
-                <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                <a href="#" class="social-btn"><i class="fab fa-x-twitter"></i> Twitter</a>
-                <a href="#" class="social-btn"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://www.tiktok.com/@Isaac_bae" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="https://www.youtube.com/@isaacbae" target="_blank" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
             </div>
 
             <div class="footer-bar">
@@ -693,7 +687,6 @@ def guestbook():
     <div class="card">
         <div class="card-content">
             <h1 class="section-title">Guestbook</h1>
-            <p class="section-subtitle">Leave a comment or message for me! (Saved on the server)</p>
             
             <h3 style="color: #e8edf2; margin-bottom: 0.8rem; font-size: 1.1rem;">Write a Comment</h3>
             
@@ -736,9 +729,9 @@ def contact():
                     <div class="contact-value">@Isaac_bae</div>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div class="contact-label">Email</div>
-                    <div class="contact-value">gareje@proton.me</div>
+                    <i class="fab fa-youtube"></i>
+                    <div class="contact-label">YouTube</div>
+                    <div class="contact-value">@isaacbae</div>
                 </div>
                 <div class="contact-item">
                     <i class="fab fa-github"></i>
@@ -748,7 +741,7 @@ def contact():
             </div>
             
             <div class="btn-group">
-                <a href="https://wa.me/27624836868" class="btn-primary"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
+                <a href="https://wa.me/27624836868" target="_blank" class="btn-primary"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
                 <a href="/" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to Home</a>
             </div>
             
