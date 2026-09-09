@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string, request, redirect, url_for, jsonify
+from flask import Flask, render_template_string, request, redirect, url_for
 import datetime
 import json
 import os
@@ -31,7 +31,10 @@ BASE_TEMPLATE = """
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Gareje.co.za | {{ title }}</title>
+    <title>Gareje: {{ title }}</title>
+    <!-- Favicon - using profile.jpg as browser tab icon -->
+    <link rel="icon" type="image/jpeg" href="/static/profile.jpg" />
+    <link rel="apple-touch-icon" href="/static/profile.jpg" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <style>
         * {
@@ -653,7 +656,7 @@ def about():
         </div>
     </div>
     """
-    return render_template_string(BASE_TEMPLATE, title="About Me", active="about", content=content.replace("{{ time }}", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+    return render_template_string(BASE_TEMPLATE, title="About", active="about", content=content.replace("{{ time }}", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 @app.route('/guestbook', methods=['GET', 'POST'])
 def guestbook():
